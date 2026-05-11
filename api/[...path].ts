@@ -68,8 +68,10 @@ const send = (res: any, status: number, data: any) => {
 };
 
 export default async function handler(req: any, res: any) {
-  const pathParam = req.query?.path;
-  const segments = Array.isArray(pathParam) ? pathParam : pathParam ? [pathParam] : [];
+  const requestUrl = new URL(req.url || '', 'http://localhost');
+  const pathname = requestUrl.pathname || '';
+  const path = pathname.replace(/^\/api\/?/, '');
+  const segments = path.split('/').filter(Boolean);
   const [resource, id] = segments;
 
   if (resource === 'menu') {
