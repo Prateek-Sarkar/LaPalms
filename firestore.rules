@@ -1,0 +1,95 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isValidId(id) { return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+    function isSignedIn() { return request.auth != null; }
+    function isAdmin() { 
+      return isSignedIn() && 
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin"; 
+    }
+
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Menu Items
+    match /menuItems/{itemId} {
+      allow read: if true;
+      allow write: if isAdmin();
+      
+      function isValidMenuItem(data) {
+        return data.name is string && data.name.size() > 0 &&
+               data.category is string &&
+               data.price is number && data.price >= 0 &&
+               data.available is bool;
+      }
+    }
+
+    // Orders (Dine-In)
+    match /orders/{orderId} {
+      allow read: if true; // Internal screens need access
+      allow create: if isValidOrder(incoming());
+      allow update: if (
+        // Allow status updates from internal screens (Kitchen/Waiter)
+        (incoming().diff(existing()).affectedKeys().hasOnly(['status']) &&
+         incoming().status in ["pending", "preparing", "ready", "completed"]) ||
+        isAdmin()
+      );
+      allow delete: if isAdmin();
+
+      function isValidOrder(data) {
+        return data.tableId is string &&
+               data.items is list &&
+               data.status == "pending" &&
+               data.type == "dineIn" &&
+               data.timestamp is timestamp;
+      }
+    }
+
+    // Delivery Orders
+    match /deliveryOrders/{orderId} {
+      allow read: if isAdmin();
+      allow create: if isValidDeliveryOrder(incoming());
+      allow update: if isAdmin() || (
+         incoming().diff(existing()).affectedKeys().hasOnly(['status']) &&
+         incoming().status in ["pending", "preparing", "ready", "completed"]
+      );
+
+      function isValidDeliveryOrder(data) {
+        return data.name is string &&
+               data.phone is string &&
+               data.address is string &&
+               data.items is list &&
+               data.status == "pending" &&
+               data.timestamp is timestamp;
+      }
+    }
+
+    // Bookings
+    match /bookings/{bookingId} {
+      allow read: if isAdmin();
+      allow create: if isValidBooking(incoming());
+      allow update: if isAdmin();
+
+      function isValidBooking(data) {
+        return data.name is string &&
+               data.phone is string &&
+               data.date is string &&
+               data.time is string &&
+               data.guestCount is number &&
+               data.status == "pending" &&
+               data.timestamp is timestamp;
+      }
+    }
+
+    // Users
+    match /users/{userId} {
+      allow read: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+      allow write: if isAdmin();
+    }
+  }
+}

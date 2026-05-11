@@ -1,0 +1,98 @@
+{
+  "entities": {
+    "MenuItem": {
+      "title": "Menu Item",
+      "description": "An item on the cafe's menu",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "category": { "type": "string" },
+        "price": { "type": "number" },
+        "description": { "type": "string" },
+        "available": { "type": "boolean" },
+        "imageUrl": { "type": "string" }
+      },
+      "required": ["name", "category", "price", "available"]
+    },
+    "Order": {
+      "title": "Dine-In Order",
+      "description": "An order placed by a customer in the cafe",
+      "type": "object",
+      "properties": {
+        "tableId": { "type": "string" },
+        "items": {
+          "type": "array",
+          "items": { "type": "object" }
+        },
+        "status": { "type": "string", "enum": ["pending", "preparing", "ready", "completed"] },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "type": { "type": "string", "enum": ["dineIn"] },
+        "total": { "type": "number" }
+      },
+      "required": ["tableId", "items", "status", "timestamp", "type"]
+    },
+    "DeliveryOrder": {
+      "title": "Delivery Order",
+      "description": "An order placed for home delivery",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "items": { "type": "array", "items": { "type": "object" } },
+        "status": { "type": "string", "enum": ["pending", "preparing", "ready", "completed"] },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "total": { "type": "number" }
+      },
+      "required": ["name", "phone", "address", "items", "status", "timestamp"]
+    },
+    "Booking": {
+      "title": "Event Booking",
+      "description": "A request to book an event or birthday",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "guestCount": { "type": "number" },
+        "specialRequests": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "confirmed", "rejected"] },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "phone", "date", "time", "guestCount", "status", "timestamp"]
+    },
+    "User": {
+      "title": "User",
+      "description": "A user of the system (admin)",
+      "type": "object",
+      "properties": {
+        "role": { "type": "string", "enum": ["admin"] },
+        "email": { "type": "string" }
+      },
+      "required": ["role"]
+    }
+  },
+  "firestore": {
+    "/menuItems/{itemId}": {
+      "schema": "MenuItem",
+      "description": "Collection of all menu items"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Collection of dine-in orders"
+    },
+    "/deliveryOrders/{orderId}": {
+      "schema": "DeliveryOrder",
+      "description": "Collection of delivery orders"
+    },
+    "/bookings/{bookingId}": {
+      "schema": "Booking",
+      "description": "Collection of event bookings"
+    },
+    "/users/{uid}": {
+      "schema": "User",
+      "description": "Collection of user profiles"
+    }
+  }
+}
