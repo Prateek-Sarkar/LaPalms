@@ -14,12 +14,16 @@ async function startServer() {
 
   // In-memory data store
   let menuItems = [
-    { id: '1', name: 'Paradise Burger', category: 'Main Course', price: 15.50, description: 'Juicy grilled patty with pineapple and teriyaki glaze.', available: true },
-    { id: '2', name: 'Coconut Shrimp', category: 'Appetizers', price: 12.00, description: 'Crispy shrimp served with a sweet chili dipping sauce.', available: true },
-    { id: '3', name: 'Blue Lagoon Mocktail', category: 'Beverages', price: 8.50, description: 'Refreshing mix of citrus, blueberry, and sparkling water.', available: true },
-    { id: '4', name: 'Island Breeze Salad', category: 'Salads', price: 13.00, description: 'Mixed greens with mango, avocado, and lime vinaigrette.', available: true },
-    { id: '5', name: 'Beach Fries', category: 'Snacks', price: 6.50, description: 'Truffle oil and sea salt dusted chunky fries.', available: true },
-    { id: '6', name: 'Mango Sticky Rice', category: 'Desserts', price: 9.00, description: 'Classic mango sticky rice with coconut cream.', available: true },
+    { id: '1', name: 'Paneer Tikka', category: 'Appetizers', price: 8.50, description: 'Char-grilled paneer with bell peppers and mint chutney.', available: true },
+    { id: '2', name: 'Samosa Trio', category: 'Snacks', price: 5.50, description: 'Crispy pastry filled with spiced potato and peas.', available: true },
+    { id: '3', name: 'Masala Dosa', category: 'Main Course', price: 10.50, description: 'Crisp dosa with potato masala, served with sambar.', available: true },
+    { id: '4', name: 'Butter Paneer', category: 'Main Course', price: 12.50, description: 'Paneer in a creamy tomato gravy with kasoori methi.', available: true },
+    { id: '5', name: 'Chole Bhature', category: 'Main Course', price: 11.00, description: 'Spiced chickpeas with fluffy bhature.', available: true },
+    { id: '6', name: 'Dal Tadka', category: 'Main Course', price: 9.00, description: 'Yellow lentils tempered with garlic and cumin.', available: true },
+    { id: '7', name: 'Jeera Rice', category: 'Main Course', price: 4.50, description: 'Steamed basmati rice with cumin and ghee.', available: true },
+    { id: '8', name: 'Garlic Naan', category: 'Breads', price: 3.00, description: 'Soft naan brushed with garlic butter.', available: true },
+    { id: '9', name: 'Mango Lassi', category: 'Beverages', price: 4.00, description: 'Chilled yogurt drink with mango and cardamom.', available: true },
+    { id: '10', name: 'Gulab Jamun', category: 'Desserts', price: 5.00, description: 'Milk dumplings in rose-scented syrup.', available: true },
   ];
 
   let orders = [];
