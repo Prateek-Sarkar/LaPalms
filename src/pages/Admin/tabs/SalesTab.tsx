@@ -67,29 +67,29 @@ export default function SalesTab() {
 
   return (
     <div className="space-y-6 sm:space-y-10">
-      <header className="bg-white p-6 sm:p-10 rounded-[32px] sm:rounded-[40px] shadow-sm border border-brand-beige/20 flex flex-col justify-between items-start sm:items-center gap-6">
+      <header className="surface-card p-6 sm:p-8 flex flex-col justify-between items-start sm:items-center gap-6">
         <div>
-          <h1 className="text-2xl sm:text-4xl font-black italic">REVENUE</h1>
-          <p className="text-brand-black/40 font-bold uppercase tracking-widest text-[10px] sm:text-xs mt-1">Growth & Performance</p>
+          <h1 className="text-2xl sm:text-3xl font-display">Revenue</h1>
+          <p className="text-brand-black/50 font-semibold uppercase tracking-widest text-[10px] sm:text-xs mt-1">Growth & performance</p>
         </div>
         <div className="flex gap-3 w-full sm:w-auto">
           <div className="flex-1 bg-brand-white p-4 sm:p-6 rounded-2xl sm:rounded-3xl text-center min-w-[100px] sm:min-w-[140px]">
-            <p className="text-[8px] sm:text-[10px] font-black tracking-widest uppercase text-brand-black/20 mb-1">Sales</p>
-            <p className="text-lg sm:text-2xl font-black italic">Rs. {totalRevenue.toFixed(2)}</p>
+            <p className="text-[8px] sm:text-[10px] font-semibold tracking-widest uppercase text-brand-black/30 mb-1">Sales</p>
+            <p className="text-lg sm:text-2xl font-semibold">Rs. {totalRevenue.toFixed(2)}</p>
           </div>
           <div className="flex-1 bg-brand-black text-brand-yellow p-4 sm:p-6 rounded-2xl sm:rounded-3xl text-center min-w-[100px] sm:min-w-[140px]">
-            <p className="text-[8px] sm:text-[10px] font-black tracking-widest uppercase text-white/40 mb-1">Orders</p>
-            <p className="text-lg sm:text-2xl font-black italic">{orders.length}</p>
+            <p className="text-[8px] sm:text-[10px] font-semibold tracking-widest uppercase text-white/40 mb-1">Orders</p>
+            <p className="text-lg sm:text-2xl font-semibold">{orders.length}</p>
           </div>
         </div>
       </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10">
         {/* Sales Trend */}
-        <div className="bg-white p-6 sm:p-10 rounded-[32px] sm:rounded-[48px] shadow-sm border border-brand-beige/10">
-          <h2 className="text-lg sm:text-xl font-black italic mb-6 sm:mb-10 flex items-center gap-3">
+        <div className="surface-card p-6 sm:p-8 border-brand-beige/30">
+          <h2 className="text-lg sm:text-xl font-semibold mb-6 sm:mb-8 flex items-center gap-3">
             <TrendingUp className="text-brand-yellow w-5 h-5 sm:w-6 sm:h-6" />
-            TREND
+            Trend
           </h2>
           <div className="h-[200px] sm:h-[300px] w-full">
             <ResponsiveContainer width="100%" height="100%">
@@ -115,10 +115,10 @@ export default function SalesTab() {
         </div>
 
         {/* Order Distribution */}
-        <div className="bg-white p-6 sm:p-10 rounded-[32px] sm:rounded-[48px] shadow-sm border border-brand-beige/10">
-          <h2 className="text-lg sm:text-xl font-black italic mb-6 sm:mb-10 flex items-center gap-3">
+        <div className="surface-card p-6 sm:p-8 border-brand-beige/30">
+          <h2 className="text-lg sm:text-xl font-semibold mb-6 sm:mb-8 flex items-center gap-3">
             <Activity className="text-brand-yellow w-5 h-5 sm:w-6 sm:h-6" />
-            CHANNELS
+            Channels
           </h2>
           <div className="h-[200px] sm:h-[300px] w-full">
             <ResponsiveContainer width="100%" height="100%">

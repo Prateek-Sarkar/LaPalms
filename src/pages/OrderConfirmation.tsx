@@ -16,8 +16,10 @@ export default function OrderConfirmation() {
           title: 'Order Confirmed',
           icon: Utensils,
           message: `Your meal is being prepared for Table ${tableId || 'Your Table'}.`,
-          buttonText: 'Back to Menu',
-          buttonAction: () => navigate('/home')
+          buttonText: 'View bill',
+          buttonAction: () => navigate(tableId ? `/bill?table=${tableId}` : '/bill'),
+          secondaryText: 'Add more items',
+          secondaryAction: () => navigate(tableId ? `/order?table=${tableId}` : '/order')
         };
       case 'delivery':
         return {
@@ -49,31 +51,43 @@ export default function OrderConfirmation() {
   const details = getDetails();
 
   return (
-    <div className="min-h-screen bg-brand-white p-6 flex flex-col items-center justify-center text-center">
+    <div className="min-h-screen page-shell p-6 flex flex-col items-center justify-center text-center">
       <motion.div
-        initial={{ scale: 0, rotate: -180 }}
-        animate={{ scale: 1, rotate: 0 }}
-        className="w-24 h-24 bg-brand-yellow rounded-[32px] flex items-center justify-center mb-8 shadow-xl shadow-brand-yellow/20"
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        className="surface-card w-full max-w-md px-8 py-10"
       >
-        <details.icon className="w-10 h-10 text-brand-black" />
+        <div className="w-20 h-20 bg-brand-yellow rounded-3xl flex items-center justify-center mb-6 mx-auto shadow-[0_16px_30px_rgba(212,175,55,0.25)]">
+          <details.icon className="w-8 h-8 text-brand-black" />
+        </div>
+
+        <h1 className="text-3xl font-display mb-3">{details.title}</h1>
+        <p className="text-brand-black/50 mb-8 text-sm leading-relaxed">
+          {details.message}
+        </p>
+
+        <div className="space-y-3">
+          <button 
+            onClick={details.buttonAction}
+            className="w-full bg-brand-black text-brand-yellow p-4 rounded-2xl font-semibold uppercase tracking-widest text-sm shadow-[0_16px_30px_rgba(23,23,23,0.2)] active:scale-95 transition-all flex items-center justify-center gap-3"
+          >
+            {details.buttonText === 'Track Order' && <MapPin className="w-5 h-5" />}
+            {details.buttonText}
+          </button>
+          {details.secondaryText && details.secondaryAction && (
+            <button
+              onClick={details.secondaryAction}
+              className="w-full border border-brand-beige/60 text-brand-black p-4 rounded-2xl font-semibold text-sm"
+            >
+              {details.secondaryText}
+            </button>
+          )}
+        </div>
       </motion.div>
 
-      <h1 className="text-4xl font-black italic mb-4">{details.title}</h1>
-      <p className="text-brand-black/40 font-medium mb-12 max-w-xs uppercase tracking-widest text-xs leading-loose">
-        {details.message}
-      </p>
-
-      <button 
-        onClick={details.buttonAction}
-        className="w-full max-w-xs bg-brand-black text-brand-yellow p-6 rounded-2xl font-black uppercase tracking-widest text-sm shadow-xl shadow-brand-black/20 active:scale-95 transition-all flex items-center justify-center gap-3"
-      >
-        {details.buttonText === 'Track Order' && <MapPin className="w-5 h-5" />}
-        {details.buttonText}
-      </button>
-
-      <footer className="absolute bottom-12 flex items-center gap-3 opacity-20">
-        <Palmtree className="w-6 h-6" />
-        <p className="text-xs font-black tracking-[0.3em] uppercase">Cafe La Palms</p>
+      <footer className="mt-10 flex items-center gap-3 text-brand-black/30">
+        <Palmtree className="w-5 h-5" />
+        <p className="text-[10px] tracking-[0.32em] uppercase">Cafe La Palms</p>
       </footer>
     </div>
   );

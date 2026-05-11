@@ -36,22 +36,23 @@ export default function EventBooking() {
   };
 
   return (
-    <div className="min-h-screen bg-brand-white p-6 pb-20">
+    <div className="min-h-screen page-shell p-6 pb-20">
       <button 
         onClick={() => navigate('/')}
-        className="mb-8 p-3 bg-white rounded-full shadow-sm"
+        className="mb-8 p-3 border border-brand-beige/50 rounded-2xl"
+        aria-label="Back"
       >
         <ArrowLeft className="w-5 h-5" />
       </button>
 
       <header className="mb-10 text-center">
-        <Palmtree className="w-12 h-12 text-brand-yellow mx-auto mb-4" />
-        <h1 className="text-3xl font-bold mb-2">Book an Event</h1>
-        <p className="text-brand-black/60 font-medium">Create memories by the shore</p>
+        <Palmtree className="w-10 h-10 text-brand-yellow mx-auto mb-4" />
+        <h1 className="text-3xl font-display mb-2">Book an event</h1>
+        <p className="text-brand-black/60">Create memories by the shore</p>
       </header>
 
       <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-6">
-        <div className="bg-white p-8 rounded-[40px] shadow-sm border border-brand-beige/20 space-y-4">
+        <div className="surface-card p-6 space-y-4">
           <div className="relative">
             <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-black/30" />
             <input 
@@ -59,7 +60,7 @@ export default function EventBooking() {
               placeholder="Your Name"
               value={formData.name}
               onChange={e => setFormData({...formData, name: e.target.value})}
-              className="w-full pl-12 pr-4 py-4 bg-brand-white rounded-2xl outline-none font-medium text-sm"
+              className="w-full pl-12 pr-4 py-4 bg-white rounded-2xl border border-brand-beige/40 outline-none text-sm"
             />
           </div>
 
@@ -71,7 +72,7 @@ export default function EventBooking() {
               placeholder="Phone Number"
               value={formData.phone}
               onChange={e => setFormData({...formData, phone: e.target.value})}
-              className="w-full pl-12 pr-4 py-4 bg-brand-white rounded-2xl outline-none font-medium text-sm"
+              className="w-full pl-12 pr-4 py-4 bg-white rounded-2xl border border-brand-beige/40 outline-none text-sm"
             />
           </div>
 
@@ -83,7 +84,7 @@ export default function EventBooking() {
                 type="date"
                 value={formData.date}
                 onChange={e => setFormData({...formData, date: e.target.value})}
-                className="w-full pl-12 pr-4 py-4 bg-brand-white rounded-2xl outline-none font-medium text-sm"
+                className="w-full pl-12 pr-4 py-4 bg-white rounded-2xl border border-brand-beige/40 outline-none text-sm"
               />
             </div>
             <div className="relative">
@@ -93,7 +94,7 @@ export default function EventBooking() {
                 type="time"
                 value={formData.time}
                 onChange={e => setFormData({...formData, time: e.target.value})}
-                className="w-full pl-12 pr-4 py-4 bg-brand-white rounded-2xl outline-none font-medium text-sm"
+                className="w-full pl-12 pr-4 py-4 bg-white rounded-2xl border border-brand-beige/40 outline-none text-sm"
               />
             </div>
           </div>
@@ -103,7 +104,7 @@ export default function EventBooking() {
             <select 
               value={formData.guests}
               onChange={e => setFormData({...formData, guests: e.target.value})}
-              className="w-full pl-12 pr-4 py-4 bg-brand-white rounded-2xl outline-none font-medium text-sm appearance-none"
+              className="w-full pl-12 pr-4 py-4 bg-white rounded-2xl border border-brand-beige/40 outline-none text-sm appearance-none"
             >
               {[2,4,6,8,10,15,20,50].map(n => (
                 <option key={n} value={n}>{n} Guests</option>
@@ -115,16 +116,16 @@ export default function EventBooking() {
             placeholder="Tell us more about your event..."
             value={formData.notes}
             onChange={e => setFormData({...formData, notes: e.target.value})}
-            className="w-full p-6 bg-brand-white rounded-2xl outline-none font-medium text-sm h-32 resize-none"
+            className="w-full p-4 bg-white rounded-2xl border border-brand-beige/40 outline-none text-sm h-32 resize-none"
           />
         </div>
 
         <button 
           disabled={submitting}
           type="submit"
-          className="w-full bg-brand-black text-brand-yellow py-6 rounded-[32px] font-black text-xl flex items-center justify-center gap-3 shadow-xl active:scale-95 transition-all disabled:opacity-50"
+          className="w-full bg-brand-black text-brand-yellow py-4 rounded-2xl font-semibold text-base flex items-center justify-center gap-3 shadow-[0_16px_30px_rgba(23,23,23,0.2)] active:scale-95 transition-all disabled:opacity-40"
         >
-          {submitting ? 'SENDING...' : 'CONFIRM REQUEST'}
+          {submitting ? 'Sending...' : 'Confirm request'}
           <Send className="w-5 h-5" />
         </button>
       </form>

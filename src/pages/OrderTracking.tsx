@@ -21,11 +21,11 @@ export default function OrderTracking() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-brand-white flex flex-col">
+    <div className="min-h-screen page-shell flex flex-col">
       {/* Mock Map Area */}
       <div className="relative flex-grow bg-brand-beige/20 overflow-hidden">
         {/* Mock Map Background Gradients */}
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:20px_20px]"></div>
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:24px_24px]"></div>
         
         {/* Mock Path */}
         <svg className="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 400 600">
@@ -44,8 +44,8 @@ export default function OrderTracking() {
           animate={{ scale: 1 }}
           className="absolute left-[50px] top-[100px] -translate-x-1/2 -translate-y-1/2 text-brand-black"
         >
-          <div className="bg-white p-3 rounded-2xl shadow-xl border border-brand-beige/20">
-            <MapPin className="w-6 h-6" />
+          <div className="bg-white p-3 rounded-2xl shadow-[0_16px_30px_rgba(23,23,23,0.12)] border border-brand-beige/30">
+            <MapPin className="w-5 h-5" />
           </div>
         </motion.div>
 
@@ -55,8 +55,8 @@ export default function OrderTracking() {
           animate={{ scale: 1 }}
           className="absolute left-[350px] top-[150px] -translate-x-1/2 -translate-y-1/2 text-brand-yellow"
         >
-          <div className="bg-brand-black p-3 rounded-2xl shadow-xl">
-            <Navigation className="w-6 h-6" />
+          <div className="bg-brand-black p-3 rounded-2xl shadow-[0_16px_30px_rgba(23,23,23,0.2)]">
+            <Navigation className="w-5 h-5" />
           </div>
         </motion.div>
 
@@ -69,41 +69,42 @@ export default function OrderTracking() {
           transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
           className="absolute -translate-x-1/2 -translate-y-1/2"
         >
-          <div className="bg-brand-yellow p-4 rounded-3xl shadow-2xl scale-110 border-4 border-white">
-            <Bike className="w-6 h-6 text-brand-black" />
+          <div className="bg-brand-yellow p-3 rounded-3xl shadow-[0_16px_30px_rgba(23,23,23,0.2)] border-2 border-white">
+            <Bike className="w-5 h-5 text-brand-black" />
           </div>
         </motion.div>
 
         <button 
           onClick={() => navigate('/')}
-          className="absolute top-6 left-6 w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg active:scale-95 transition-all text-brand-black"
+          className="absolute top-6 left-6 w-11 h-11 bg-white rounded-2xl flex items-center justify-center border border-brand-beige/40 shadow-sm active:scale-95 transition-all text-brand-black"
+          aria-label="Back"
         >
-          <ChevronLeft className="w-6 h-6" />
+          <ChevronLeft className="w-5 h-5" />
         </button>
       </div>
 
       {/* Info Card */}
-      <div className="bg-white rounded-t-[48px] p-10 shadow-2xl border-t border-brand-beige/20">
+      <div className="bg-white rounded-t-[48px] p-8 shadow-[0_-12px_30px_rgba(23,23,23,0.12)] border-t border-brand-beige/30">
         <div className="max-w-md mx-auto">
           <div className="flex justify-between items-start mb-8">
             <div>
-              <h1 className="text-3xl font-black italic mb-1">LIVE TRACKING</h1>
-              <p className="text-brand-black/40 text-[10px] font-black uppercase tracking-[0.2em]">Estimated: 25-30 Mins</p>
+              <h1 className="text-3xl font-display mb-1">Live tracking</h1>
+              <p className="text-brand-black/50 text-[10px] font-semibold uppercase tracking-[0.2em]">Estimated: 25-30 mins</p>
             </div>
-            <div className="px-4 py-2 bg-brand-yellow rounded-full text-xs font-black uppercase tracking-widest">
+            <div className="px-4 py-2 bg-brand-yellow rounded-full text-xs font-semibold uppercase tracking-widest">
               Lp-9921
             </div>
           </div>
 
           <div className="space-y-8">
             {statuses.map((s, i) => (
-              <div key={i} className={`flex items-center gap-6 transition-all duration-500 ${i > statusIndex ? 'opacity-20 grayscale' : 'opacity-100'}`}>
-                <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm ${i === statusIndex ? 'bg-brand-yellow text-brand-black scale-110 ring-4 ring-brand-yellow/20' : 'bg-brand-beige/30 text-brand-black/40'}`}>
-                  <s.icon className="w-6 h-6" />
+              <div key={i} className={`flex items-center gap-5 transition-all duration-500 ${i > statusIndex ? 'opacity-20 grayscale' : 'opacity-100'}`}>
+                <div className={`w-11 h-11 rounded-2xl flex items-center justify-center shadow-sm ${i === statusIndex ? 'bg-brand-yellow text-brand-black scale-105 ring-4 ring-brand-yellow/20' : 'bg-brand-beige/30 text-brand-black/40'}`}>
+                  <s.icon className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className={`font-black italic text-lg ${i === statusIndex ? 'text-brand-black' : 'text-brand-black/40'}`}>{s.title}</h3>
-                  <p className="text-xs font-medium text-brand-black/40">{s.desc}</p>
+                  <h3 className={`font-semibold text-base ${i === statusIndex ? 'text-brand-black' : 'text-brand-black/40'}`}>{s.title}</h3>
+                  <p className="text-xs text-brand-black/50">{s.desc}</p>
                 </div>
               </div>
             ))}
@@ -111,7 +112,7 @@ export default function OrderTracking() {
 
           <button 
             onClick={() => window.location.href = 'tel:+1234567890'}
-            className="w-full mt-10 p-5 bg-brand-black text-brand-yellow rounded-2xl font-black uppercase tracking-widest text-sm shadow-xl shadow-brand-black/10 flex items-center justify-center gap-3"
+            className="w-full mt-10 p-4 bg-brand-black text-brand-yellow rounded-2xl font-semibold uppercase tracking-widest text-sm shadow-[0_16px_30px_rgba(23,23,23,0.2)] flex items-center justify-center gap-3"
           >
             Call Support
           </button>

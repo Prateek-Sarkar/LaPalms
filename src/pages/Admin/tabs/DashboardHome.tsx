@@ -47,7 +47,7 @@ export default function DashboardHome() {
     setIsSeeding(true);
     try {
       const menuItems = [
-        { name: 'Paradise Burger', category: 'Main Course', price: 15.50, description: 'Juicy beef patty with grilled pineapple and teriyaki glaze.', available: true },
+        { name: 'Paradise Burger', category: 'Main Course', price: 15.50, description: 'Juicy grilled patty with pineapple and teriyaki glaze.', available: true },
         { name: 'Coconut Shrimp', category: 'Appetizers', price: 12.00, description: 'Crispy shrimp served with a sweet chili dipping sauce.', available: true },
         { name: 'Blue Lagoon Mocktail', category: 'Beverages', price: 8.50, description: 'Refreshing mix of citrus, blueberry, and sparkling water.', available: true },
         { name: 'Island Breeze Salad', category: 'Salads', price: 13.00, description: 'Mixed greens with mango, avocado, and lime vinaigrette.', available: true },
@@ -81,23 +81,23 @@ export default function DashboardHome() {
     <div className="space-y-6 sm:space-y-8">
       <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-black italic">COMMAND CENTER</h1>
-          <p className="text-brand-black/40 font-bold uppercase tracking-widest text-[9px] sm:text-[10px] mt-1">Live Statistics</p>
+          <h1 className="text-2xl sm:text-3xl font-display">Command Center</h1>
+          <p className="text-brand-black/50 font-semibold uppercase tracking-widest text-[9px] sm:text-[10px] mt-1">Live statistics</p>
         </div>
         <div className="flex gap-3 w-full sm:w-auto">
           <button 
             onClick={fetchStats}
-            className="flex-1 sm:flex-none p-4 bg-white rounded-2xl shadow-sm border border-brand-beige/20 hover:bg-brand-white transition-colors flex items-center justify-center"
+            className="flex-1 sm:flex-none p-4 bg-white rounded-2xl border border-brand-beige/40 hover:bg-brand-white transition-colors flex items-center justify-center"
           >
             <RefreshCw className="w-5 h-5 text-brand-black" />
           </button>
           <button 
             onClick={seedDatabase}
             disabled={isSeeding}
-            className="flex-[3] sm:flex-none bg-brand-yellow text-brand-black px-6 sm:px-8 py-4 rounded-2xl font-black uppercase tracking-widest text-[10px] sm:text-sm flex items-center justify-center gap-3 active:scale-95 transition-all shadow-xl shadow-brand-yellow/10"
+            className="flex-[3] sm:flex-none bg-brand-yellow text-brand-black px-6 sm:px-8 py-4 rounded-2xl font-semibold uppercase tracking-widest text-[10px] sm:text-sm flex items-center justify-center gap-3 active:scale-95 transition-all shadow-[0_16px_30px_rgba(212,175,55,0.2)]"
           >
             <Zap className="w-4 h-4 sm:w-5 sm:h-5" />
-            {isSeeding ? 'Wait...' : 'Seed Data'}
+            {isSeeding ? 'Seeding...' : 'Seed data'}
           </button>
         </div>
       </header>
@@ -109,26 +109,26 @@ export default function DashboardHome() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.1 }}
             key={stat.label}
-            className="bg-white p-6 sm:p-10 rounded-[32px] sm:rounded-[40px] shadow-sm border border-brand-beige/10 group active:border-brand-yellow transition-all"
+            className="surface-card p-6 sm:p-8 border-brand-beige/30 group active:border-brand-yellow transition-all"
           >
             <div className={`${stat.bg} w-12 h-12 sm:w-16 sm:h-16 rounded-2xl sm:rounded-3xl flex items-center justify-center mb-6 sm:mb-8 shadow-sm`}>
               <stat.icon className={`w-6 h-6 sm:w-8 sm:h-8 ${stat.color}`} />
             </div>
-            <p className="text-[8px] sm:text-[10px] font-black uppercase tracking-[0.2em] sm:tracking-[0.3em] text-brand-black/20 mb-1">{stat.label}</p>
-            <p className="text-2xl sm:text-4xl font-black italic">{stat.value}</p>
+            <p className="text-[8px] sm:text-[10px] font-semibold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-brand-black/30 mb-1">{stat.label}</p>
+            <p className="text-2xl sm:text-4xl font-semibold">{stat.value}</p>
           </motion.div>
         ))}
       </div>
 
-      <div className="bg-brand-black text-white p-8 sm:p-12 rounded-[32px] sm:rounded-[56px] shadow-2xl relative overflow-hidden">
+      <div className="bg-brand-black text-white p-8 sm:p-10 rounded-[32px] sm:rounded-[40px] shadow-[0_20px_40px_rgba(23,23,23,0.35)] relative overflow-hidden">
         <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
           <div>
-            <h2 className="text-2xl sm:text-4xl font-black italic mb-3 sm:mb-4">Tropical Hospitality</h2>
-            <p className="text-white/40 text-sm sm:text-base font-medium max-w-md">Your command center is connected to all guest points. Manage with beachside ease.</p>
+            <h2 className="text-2xl sm:text-3xl font-display mb-3 sm:mb-4">Tropical hospitality</h2>
+            <p className="text-white/50 text-sm sm:text-base max-w-md">Your command center is connected to all guest points. Manage with beachside ease.</p>
           </div>
           <div className="flex -space-x-3 sm:-space-x-4">
             {[1,2,3,4].map(i => (
-              <div key={i} className="w-12 h-12 sm:w-16 sm:h-16 rounded-full border-2 sm:border-4 border-brand-black bg-brand-yellow flex items-center justify-center font-black text-brand-black text-xs sm:text-base">
+              <div key={i} className="w-12 h-12 sm:w-16 sm:h-16 rounded-full border-2 sm:border-4 border-brand-black bg-brand-yellow flex items-center justify-center font-semibold text-brand-black text-xs sm:text-base">
                 P
               </div>
             ))}

@@ -68,27 +68,30 @@ export default function DineInOrder() {
   };
 
   if (loading) {
-    return <div className="h-screen flex items-center justify-center">Loading...</div>;
+    return <div className="min-h-screen page-shell flex items-center justify-center text-brand-black/60">Loading...</div>;
   }
 
   const categories = Array.from(new Set(menuItems.map(i => i.category)));
 
   return (
-    <div className="min-h-screen bg-brand-white pb-24">
+    <div className="min-h-screen page-shell pb-24">
       {/* Header */}
-      <header className="sticky top-0 z-20 bg-brand-white/80 backdrop-blur-md p-6 flex items-center justify-between border-b border-brand-beige/20">
-        <button onClick={() => navigate(-1)} className="p-2 -ml-2"><ArrowLeft /></button>
+      <header className="sticky top-0 z-20 bg-brand-white/80 backdrop-blur-md p-6 flex items-center justify-between border-b border-brand-beige/30">
+        <button onClick={() => navigate(-1)} className="p-2 -ml-2" aria-label="Back">
+          <ArrowLeft className="w-5 h-5" />
+        </button>
         <div className="text-center">
-          <h1 className="text-xl font-black italic">MENU</h1>
-          <p className="text-[10px] font-bold text-brand-black/40 tracking-[0.2em] uppercase">Table {tableId || 'Select'}</p>
+          <h1 className="text-xl font-display">Menu</h1>
+          <p className="text-[10px] font-semibold text-brand-black/50 tracking-[0.2em] uppercase">Table {tableId || 'Select'}</p>
         </div>
         <button 
           onClick={() => setIsCartOpen(true)}
           className="relative p-2"
+          aria-label="Open cart"
         >
-          <ShoppingBag />
+          <ShoppingBag className="w-5 h-5" />
           {cart.length > 0 && (
-            <span className="absolute top-0 right-0 w-5 h-5 bg-brand-black text-brand-yellow rounded-full text-[10px] font-black flex items-center justify-center">
+            <span className="absolute top-0 right-0 w-5 h-5 bg-brand-black text-brand-yellow rounded-full text-[10px] font-semibold flex items-center justify-center">
               {cart.reduce((s, i) => s + i.quantity, 0)}
             </span>
           )}
@@ -98,47 +101,47 @@ export default function DineInOrder() {
       {/* Categories & Menu */}
       <div className="p-6">
         {menuItems.length === 0 ? (
-          <div className="text-center py-20 opacity-40">
+          <div className="text-center py-20 text-brand-black/50">
             <Utensils className="w-16 h-16 mx-auto mb-4" />
-            <p className="text-xl font-bold">Our menu is being prepared...</p>
+            <p className="text-lg font-semibold">Our menu is being prepared...</p>
           </div>
         ) : (
           categories.map(category => (
             <section key={category} className="mb-10">
-              <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+              <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
                 <span className="w-2 h-6 bg-brand-yellow rounded-full"></span>
                 {category}
               </h2>
               <div className="grid grid-cols-1 gap-4">
                 {menuItems.filter(i => i.category === category).map(item => (
-                  <div key={item.id} className="card-beachy flex gap-4">
-                    <div className="w-24 h-24 bg-brand-beige/20 rounded-xl flex-shrink-0 flex items-center justify-center text-brand-black/20 overflow-hidden">
+                  <div key={item.id} className="surface-card p-4 flex gap-4">
+                    <div className="w-20 h-20 bg-brand-beige/30 rounded-2xl flex-shrink-0 flex items-center justify-center text-brand-black/20 overflow-hidden">
                       {item.imageUrl ? (
                         <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" />
                       ) : (
-                        <Utensils className="w-8 h-8" />
+                        <Utensils className="w-7 h-7" />
                       )}
                     </div>
                     <div className="flex-grow flex flex-col">
-                      <h3 className="font-bold text-lg">{item.name}</h3>
-                      <p className="text-xs text-brand-black/60 line-clamp-2 mb-2">{item.description}</p>
+                      <h3 className="font-semibold text-base">{item.name}</h3>
+                      <p className="text-xs text-brand-black/60 line-clamp-2 mb-3">{item.description}</p>
                       <div className="mt-auto flex justify-between items-center">
-                        <span className="font-bold text-brand-black">Rs. {item.price.toFixed(2)}</span>
+                        <span className="font-semibold text-brand-black">Rs. {item.price.toFixed(2)}</span>
                         <div className="flex items-center gap-3">
                           {cart.find(i => i.itemId === item.id) && (
                             <button 
                               onClick={() => removeFromCart(item.id)}
-                              className="w-8 h-8 rounded-lg border border-brand-beige flex items-center justify-center active:bg-brand-beige"
+                              className="w-8 h-8 rounded-xl border border-brand-beige/60 flex items-center justify-center active:bg-brand-beige/40"
                             >
                               <Minus className="w-4 h-4" />
                             </button>
                           )}
                           {cart.find(i => i.itemId === item.id) && (
-                            <span className="font-bold">{cart.find(i => i.itemId === item.id)?.quantity}</span>
+                            <span className="font-semibold">{cart.find(i => i.itemId === item.id)?.quantity}</span>
                           )}
                           <button 
                             onClick={() => addToCart(item)}
-                            className="w-8 h-8 rounded-lg bg-brand-yellow flex items-center justify-center active:scale-90 transition-transform shadow-sm"
+                            className="w-8 h-8 rounded-xl bg-brand-yellow flex items-center justify-center active:scale-95 transition-transform shadow-sm"
                           >
                             <Plus className="w-4 h-4" />
                           </button>
@@ -164,15 +167,15 @@ export default function DineInOrder() {
           >
             <button 
               onClick={() => setIsCartOpen(true)}
-              className="w-full bg-brand-black text-brand-yellow py-5 rounded-2xl font-black text-lg shadow-2xl flex items-center justify-between px-8 active:scale-95 transition-all"
+              className="w-full bg-brand-black text-brand-yellow py-4 rounded-2xl font-semibold text-base shadow-[0_16px_30px_rgba(23,23,23,0.2)] flex items-center justify-between px-6 active:scale-95 transition-all"
             >
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-brand-yellow text-brand-black rounded-lg flex items-center justify-center text-sm">
+                <div className="w-8 h-8 bg-brand-yellow text-brand-black rounded-lg flex items-center justify-center text-sm font-semibold">
                   {cart.reduce((s, i) => s + i.quantity, 0)}
                 </div>
-                <span>REVIEW ORDER</span>
+                <span>Review order</span>
               </div>
-              <span className="text-white/40 font-bold">Rs. {total.toFixed(2)}</span>
+              <span className="text-white/40 font-semibold">Rs. {total.toFixed(2)}</span>
             </button>
           </motion.div>
         )}
@@ -196,7 +199,7 @@ export default function DineInOrder() {
               className="fixed bottom-0 inset-x-0 bg-white rounded-t-[40px] z-50 p-8 max-h-[80vh] overflow-y-auto"
             >
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-black italic">YOUR ORDER</h2>
+                <h2 className="text-2xl font-display">Your order</h2>
                 <button onClick={() => setIsCartOpen(false)}><X /></button>
               </div>
 
@@ -207,22 +210,22 @@ export default function DineInOrder() {
                   {cart.map(item => (
                     <div key={item.itemId} className="flex justify-between items-center">
                       <div className="flex items-center gap-4">
-                        <span className="bg-brand-yellow text-brand-black px-2 py-1 rounded font-black text-xs">{item.quantity}x</span>
-                        <span className="font-bold">{item.name}</span>
+                        <span className="bg-brand-yellow text-brand-black px-2 py-1 rounded font-semibold text-xs">{item.quantity}x</span>
+                        <span className="font-semibold">{item.name}</span>
                       </div>
-                      <span className="font-bold">Rs. {(item.price * item.quantity).toFixed(2)}</span>
+                      <span className="font-semibold">Rs. {(item.price * item.quantity).toFixed(2)}</span>
                     </div>
                   ))}
                   <div className="border-t border-brand-beige pt-6">
                     <div className="flex justify-between mb-8">
-                      <span className="text-brand-black/40 font-bold uppercase tracking-widest">Total Amount</span>
-                      <span className="text-2xl font-black">Rs. {total.toFixed(2)}</span>
+                      <span className="text-brand-black/40 font-semibold uppercase tracking-widest">Total Amount</span>
+                      <span className="text-2xl font-semibold">Rs. {total.toFixed(2)}</span>
                     </div>
                     <button 
                       onClick={placeOrder}
-                      className="w-full bg-brand-black text-brand-yellow py-5 rounded-2xl font-black text-xl shadow-xl shadow-brand-black/20 active:scale-95 transition-transform"
+                      className="w-full bg-brand-black text-brand-yellow py-4 rounded-2xl font-semibold text-base shadow-[0_16px_30px_rgba(23,23,23,0.2)] active:scale-95 transition-transform"
                     >
-                      PLACE ORDER
+                      Place order
                     </button>
                   </div>
                 </div>

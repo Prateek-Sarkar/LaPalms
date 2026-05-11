@@ -14,7 +14,7 @@ async function startServer() {
 
   // In-memory data store
   let menuItems = [
-    { id: '1', name: 'Paradise Burger', category: 'Main Course', price: 15.50, description: 'Juicy beef patty with grilled pineapple and teriyaki glaze.', available: true },
+    { id: '1', name: 'Paradise Burger', category: 'Main Course', price: 15.50, description: 'Juicy grilled patty with pineapple and teriyaki glaze.', available: true },
     { id: '2', name: 'Coconut Shrimp', category: 'Appetizers', price: 12.00, description: 'Crispy shrimp served with a sweet chili dipping sauce.', available: true },
     { id: '3', name: 'Blue Lagoon Mocktail', category: 'Beverages', price: 8.50, description: 'Refreshing mix of citrus, blueberry, and sparkling water.', available: true },
     { id: '4', name: 'Island Breeze Salad', category: 'Salads', price: 13.00, description: 'Mixed greens with mango, avocado, and lime vinaigrette.', available: true },

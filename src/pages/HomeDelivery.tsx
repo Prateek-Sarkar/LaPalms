@@ -71,24 +71,26 @@ export default function HomeDelivery() {
   };
 
   if (loading) {
-    return <div className="h-screen flex items-center justify-center">Loading...</div>;
+    return <div className="min-h-screen page-shell flex items-center justify-center text-brand-black/60">Loading...</div>;
   }
 
   const categories = Array.from(new Set(menuItems.map(i => i.category)));
 
   return (
-    <div className="min-h-screen bg-[#FDFDFD] pb-24">
+    <div className="min-h-screen page-shell pb-24">
       {/* Header */}
-      <header className="sticky top-0 z-20 bg-white/80 backdrop-blur-md p-6 flex items-center justify-between border-b border-brand-beige/20">
-        <button onClick={() => navigate('/')} className="p-2 -ml-2"><ArrowLeft /></button>
+      <header className="sticky top-0 z-20 bg-white/80 backdrop-blur-md p-6 flex items-center justify-between border-b border-brand-beige/30">
+        <button onClick={() => navigate('/')} className="p-2 -ml-2" aria-label="Back">
+          <ArrowLeft className="w-5 h-5" />
+        </button>
         <div className="text-center">
-          <h1 className="text-xl font-black italic">DELIVERY</h1>
-          <p className="text-[10px] font-bold text-brand-black/40 tracking-[0.2em] uppercase">Palms at Home</p>
+          <h1 className="text-xl font-display">Delivery</h1>
+          <p className="text-[10px] font-semibold text-brand-black/50 tracking-[0.2em] uppercase">Palms at Home</p>
         </div>
-        <button onClick={() => setIsCartOpen(true)} className="relative p-2">
-          <ShoppingBag />
+        <button onClick={() => setIsCartOpen(true)} className="relative p-2" aria-label="Open cart">
+          <ShoppingBag className="w-5 h-5" />
           {cart.length > 0 && (
-            <span className="absolute top-0 right-0 w-5 h-5 bg-black text-brand-yellow rounded-full text-[10px] font-black flex items-center justify-center">
+            <span className="absolute top-0 right-0 w-5 h-5 bg-black text-brand-yellow rounded-full text-[10px] font-semibold flex items-center justify-center">
               {cart.reduce((s, i) => s + i.quantity, 0)}
             </span>
           )}
@@ -98,41 +100,41 @@ export default function HomeDelivery() {
       {/* Categories & Menu */}
       <div className="p-6">
         {menuItems.length === 0 ? (
-          <div className="text-center py-20 opacity-40">
+          <div className="text-center py-20 text-brand-black/50">
             <Utensils className="w-16 h-16 mx-auto mb-4" />
-            <p className="text-xl font-bold">Delivery menu coming soon...</p>
+            <p className="text-lg font-semibold">Delivery menu coming soon...</p>
           </div>
         ) : (
           categories.map(category => (
             <section key={category} className="mb-10">
-              <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+              <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
                 <span className="w-2 h-6 bg-brand-yellow rounded-full"></span>
                 {category}
               </h2>
               <div className="grid grid-cols-1 gap-4">
                 {menuItems.filter(i => i.category === category).map(item => (
-                  <div key={item.id} className="card-beachy flex gap-4">
-                    <div className="w-24 h-24 bg-brand-beige/20 rounded-xl flex-shrink-0 flex items-center justify-center text-brand-black/20">
-                      <Utensils className="w-8 h-8" />
+                  <div key={item.id} className="surface-card p-4 flex gap-4">
+                    <div className="w-20 h-20 bg-brand-beige/30 rounded-2xl flex-shrink-0 flex items-center justify-center text-brand-black/20">
+                      <Utensils className="w-7 h-7" />
                     </div>
                     <div className="flex-grow flex flex-col">
-                      <h3 className="font-bold text-lg">{item.name}</h3>
-                      <p className="text-xs text-brand-black/60 line-clamp-2 mb-2">{item.description}</p>
+                      <h3 className="font-semibold text-base">{item.name}</h3>
+                      <p className="text-xs text-brand-black/60 line-clamp-2 mb-3">{item.description}</p>
                       <div className="mt-auto flex justify-between items-center">
-                        <span className="font-bold text-brand-black">Rs. {item.price.toFixed(2)}</span>
+                        <span className="font-semibold text-brand-black">Rs. {item.price.toFixed(2)}</span>
                         <div className="flex items-center gap-3">
                           <button 
                             onClick={() => removeFromCart(item.id)}
-                            className={`w-8 h-8 rounded-lg border border-brand-beige flex items-center justify-center active:bg-brand-beige transition-opacity ${cart.find(i => i.itemId === item.id) ? 'opacity-100' : 'opacity-0'}`}
+                            className={`w-8 h-8 rounded-xl border border-brand-beige/60 flex items-center justify-center active:bg-brand-beige/40 transition-opacity ${cart.find(i => i.itemId === item.id) ? 'opacity-100' : 'opacity-0'}`}
                           >
                             <Minus className="w-4 h-4" />
                           </button>
                           {cart.find(i => i.itemId === item.id) && (
-                            <span className="font-bold">{cart.find(i => i.itemId === item.id)?.quantity}</span>
+                            <span className="font-semibold">{cart.find(i => i.itemId === item.id)?.quantity}</span>
                           )}
                           <button 
                             onClick={() => addToCart(item)}
-                            className="w-8 h-8 rounded-lg bg-brand-yellow flex items-center justify-center active:scale-90 transition-transform shadow-sm"
+                            className="w-8 h-8 rounded-xl bg-brand-yellow flex items-center justify-center active:scale-95 transition-transform shadow-sm"
                           >
                             <Plus className="w-4 h-4" />
                           </button>
@@ -158,15 +160,15 @@ export default function HomeDelivery() {
           >
             <button 
               onClick={() => setIsCartOpen(true)}
-              className="w-full bg-black text-brand-yellow py-5 rounded-2xl font-black text-lg shadow-2xl flex items-center justify-between px-8 active:scale-95 transition-all"
+              className="w-full bg-brand-black text-brand-yellow py-4 rounded-2xl font-semibold text-base shadow-[0_16px_30px_rgba(23,23,23,0.2)] flex items-center justify-between px-6 active:scale-95 transition-all"
             >
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 bg-brand-yellow text-black rounded-lg flex items-center justify-center text-sm">
+                <div className="w-8 h-8 bg-brand-yellow text-brand-black rounded-lg flex items-center justify-center text-sm font-semibold">
                   {cart.reduce((s, i) => s + i.quantity, 0)}
                 </div>
-                <span>PROCEED TO CART</span>
+                <span>Proceed to cart</span>
               </div>
-              <span className="text-white/40 font-bold">Rs. {total.toFixed(2)}</span>
+              <span className="text-white/40 font-semibold">Rs. {total.toFixed(2)}</span>
             </button>
           </motion.div>
         )}
@@ -190,14 +192,14 @@ export default function HomeDelivery() {
               className="fixed inset-y-0 right-0 w-full max-w-md bg-white z-50 p-8 overflow-y-auto"
             >
               <div className="flex justify-between items-center mb-10">
-                <h2 className="text-3xl font-black italic">YOUR BAG</h2>
-                <button onClick={() => setIsCartOpen(false)} className="p-3 bg-brand-white rounded-full"><X /></button>
+                <h2 className="text-3xl font-display">Your bag</h2>
+                <button onClick={() => setIsCartOpen(false)} className="p-3 border border-brand-beige/50 rounded-2xl"><X /></button>
               </div>
 
               {cart.length === 0 ? (
-                <div className="py-20 text-center flex flex-col items-center opacity-20">
+                <div className="py-20 text-center flex flex-col items-center text-brand-black/40">
                   <ShoppingBag className="w-16 h-16 mb-4" />
-                  <p className="font-black italic text-xl">EMPTY BAG</p>
+                  <p className="font-semibold text-lg">Empty bag</p>
                 </div>
               ) : (
                 <div className="space-y-10">
@@ -205,57 +207,57 @@ export default function HomeDelivery() {
                     {cart.map(item => (
                       <div key={item.itemId} className="flex justify-between items-center">
                         <div className="flex items-center gap-4">
-                          <span className="w-10 h-10 bg-brand-yellow rounded-xl flex items-center justify-center font-black">{item.quantity}</span>
+                          <span className="w-10 h-10 bg-brand-yellow rounded-xl flex items-center justify-center font-semibold">{item.quantity}</span>
                           <div>
-                            <p className="font-bold">{item.name}</p>
-                            <p className="text-[10px] text-brand-black/40 font-bold uppercase tracking-widest">Rs. {item.price.toFixed(2)} / unit</p>
+                            <p className="font-semibold">{item.name}</p>
+                            <p className="text-[10px] text-brand-black/40 font-semibold uppercase tracking-widest">Rs. {item.price.toFixed(2)} / unit</p>
                           </div>
                         </div>
-                        <span className="font-black text-brand-black">Rs. {(item.price * item.quantity).toFixed(2)}</span>
+                        <span className="font-semibold text-brand-black">Rs. {(item.price * item.quantity).toFixed(2)}</span>
                       </div>
                     ))}
                   </div>
 
-                  <div className="bg-brand-white p-6 rounded-[32px] space-y-4">
-                    <h3 className="font-black italic flex items-center gap-2">
+                  <div className="surface-card p-5 space-y-4">
+                    <h3 className="font-semibold flex items-center gap-2">
                        <MapPin className="w-5 h-5 text-brand-yellow" />
-                       SHIPPING DETAILS
+                       Shipping details
                     </h3>
                     <input 
                       placeholder="Receiver Name"
                       value={deliveryInfo.name}
                       onChange={e => setDeliveryInfo({...deliveryInfo, name: e.target.value})}
-                      className="w-full bg-white p-4 rounded-2xl border border-brand-beige/30 outline-none font-medium"
+                      className="w-full bg-white p-4 rounded-2xl border border-brand-beige/40 outline-none text-sm"
                     />
                     <input 
                       placeholder="Mobile Number"
                       value={deliveryInfo.phone}
                       onChange={e => setDeliveryInfo({...deliveryInfo, phone: e.target.value})}
-                      className="w-full bg-white p-4 rounded-2xl border border-brand-beige/30 outline-none font-medium"
+                      className="w-full bg-white p-4 rounded-2xl border border-brand-beige/40 outline-none text-sm"
                     />
                     <textarea 
                       placeholder="Full Delivery Address"
                       value={deliveryInfo.address}
                       onChange={e => setDeliveryInfo({...deliveryInfo, address: e.target.value})}
-                      className="w-full bg-white p-4 rounded-2xl border border-brand-beige/30 outline-none h-32 resize-none font-medium"
+                      className="w-full bg-white p-4 rounded-2xl border border-brand-beige/40 outline-none h-32 resize-none text-sm"
                     />
                   </div>
 
                   <div className="pt-6">
                     <div className="flex justify-between mb-8 items-end">
                       <div>
-                        <p className="text-[10px] text-black/40 font-black tracking-[0.2em] uppercase">Total Order</p>
-                        <p className="text-4xl font-black italic">Rs. {total.toFixed(2)}</p>
+                        <p className="text-[10px] text-black/40 font-semibold tracking-[0.2em] uppercase">Total Order</p>
+                        <p className="text-3xl font-semibold">Rs. {total.toFixed(2)}</p>
                       </div>
                     </div>
                     <button 
                       onClick={placeOrder}
                       disabled={!deliveryInfo.address || !deliveryInfo.phone}
-                      className="w-full bg-brand-black text-brand-yellow py-6 rounded-2xl font-black text-xl shadow-2xl shadow-brand-black/20 active:scale-95 transition-all disabled:opacity-30"
+                      className="w-full bg-brand-black text-brand-yellow py-4 rounded-2xl font-semibold text-base shadow-[0_16px_30px_rgba(23,23,23,0.2)] active:scale-95 transition-all disabled:opacity-40"
                     >
-                      ORDER FOR DELIVERY
+                      Order for delivery
                     </button>
-                    <p className="mt-4 text-[10px] text-center font-bold text-brand-black/30 uppercase tracking-widest">Typical delivery time: 35-45 mins</p>
+                    <p className="mt-4 text-[10px] text-center font-semibold text-brand-black/40 uppercase tracking-widest">Typical delivery time: 35-45 mins</p>
                   </div>
                 </div>
               )}

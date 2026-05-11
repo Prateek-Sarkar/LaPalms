@@ -33,13 +33,13 @@ export default function BookingsTab() {
 
   return (
     <div className="space-y-8">
-      <header className="flex justify-between items-center bg-white p-8 rounded-[32px] shadow-sm border border-brand-beige/20">
+      <header className="flex justify-between items-center surface-card p-6 sm:p-8">
         <div>
-          <h1 className="text-3xl font-black italic">GUEST BOOKINGS</h1>
-          <p className="text-brand-black/40 font-bold uppercase tracking-widest text-[10px] mt-1">Reservation Desk</p>
+          <h1 className="text-2xl sm:text-3xl font-display">Guest bookings</h1>
+          <p className="text-brand-black/50 font-semibold uppercase tracking-widest text-[10px] mt-1">Reservation desk</p>
         </div>
-        <button onClick={fetchBookings} className="p-4 bg-brand-white rounded-2xl">
-          <RefreshCw className="w-5 h-5" />
+        <button onClick={fetchBookings} className="p-3 border border-brand-beige/50 rounded-2xl">
+          <RefreshCw className="w-4 h-4" />
         </button>
       </header>
 
@@ -52,17 +52,17 @@ export default function BookingsTab() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-white p-6 sm:p-10 rounded-[32px] sm:rounded-[48px] border border-brand-beige/20 shadow-sm group active:border-brand-yellow transition-all"
+              className="surface-card p-6 sm:p-8 border-brand-beige/30 group active:border-brand-yellow transition-all"
             >
               <div className="flex justify-between items-start mb-6 sm:mb-8">
                 <div>
-                  <h3 className="text-lg sm:text-2xl font-black italic text-brand-black truncate max-w-[150px] sm:max-w-none">{booking.name}</h3>
+                  <h3 className="text-lg sm:text-2xl font-semibold text-brand-black truncate max-w-[150px] sm:max-w-none">{booking.name}</h3>
                   <div className="flex items-center gap-2 text-brand-black/40 mt-1">
                     <Phone className="w-3 h-3" />
-                    <span className="text-[10px] sm:text-xs font-bold">{booking.phone}</span>
+                    <span className="text-[10px] sm:text-xs font-semibold">{booking.phone}</span>
                   </div>
                 </div>
-                <span className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-[8px] sm:text-[10px] font-black uppercase tracking-widest ${
+                <span className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-[8px] sm:text-[10px] font-semibold uppercase tracking-widest ${
                   booking.status === 'confirmed' ? 'bg-green-100 text-green-600' :
                   booking.status === 'rejected' ? 'bg-red-100 text-red-600' :
                   'bg-brand-yellow/20 text-brand-black'
@@ -73,19 +73,19 @@ export default function BookingsTab() {
 
               <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
                 <div className="bg-brand-white p-3 sm:p-4 rounded-2xl sm:rounded-3xl">
-                  <p className="text-[7px] sm:text-[10px] font-black uppercase tracking-widest text-brand-black/20 mb-1">Date & Time</p>
-                  <p className="text-xs sm:text-sm font-bold flex items-center gap-2 truncate"><Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-brand-yellow flex-shrink-0" /> {booking.date}</p>
-                  <p className="text-xs sm:text-sm font-bold flex items-center gap-2 mt-1 truncate"><Clock className="w-3 h-3 sm:w-4 sm:h-4 text-brand-yellow flex-shrink-0" /> {booking.time}</p>
+                  <p className="text-[7px] sm:text-[10px] font-semibold uppercase tracking-widest text-brand-black/30 mb-1">Date & Time</p>
+                  <p className="text-xs sm:text-sm font-semibold flex items-center gap-2 truncate"><Calendar className="w-3 h-3 sm:w-4 sm:h-4 text-brand-yellow flex-shrink-0" /> {booking.date}</p>
+                  <p className="text-xs sm:text-sm font-semibold flex items-center gap-2 mt-1 truncate"><Clock className="w-3 h-3 sm:w-4 sm:h-4 text-brand-yellow flex-shrink-0" /> {booking.time}</p>
                 </div>
                 <div className="bg-brand-white p-3 sm:p-4 rounded-2xl sm:rounded-3xl">
-                  <p className="text-[7px] sm:text-[10px] font-black uppercase tracking-widest text-brand-black/20 mb-1">Party Size</p>
-                  <p className="text-xs sm:text-sm font-bold flex items-center gap-2"><Users className="w-3 h-3 sm:w-4 sm:h-4 text-brand-yellow flex-shrink-0" /> {booking.guests}</p>
-                  <p className="text-[8px] sm:text-[10px] font-bold text-brand-black/40 mt-1 truncate">{booking.eventType}</p>
+                  <p className="text-[7px] sm:text-[10px] font-semibold uppercase tracking-widest text-brand-black/30 mb-1">Party Size</p>
+                  <p className="text-xs sm:text-sm font-semibold flex items-center gap-2"><Users className="w-3 h-3 sm:w-4 sm:h-4 text-brand-yellow flex-shrink-0" /> {booking.guests}</p>
+                  <p className="text-[8px] sm:text-[10px] font-semibold text-brand-black/50 mt-1 truncate">{booking.eventType}</p>
                 </div>
               </div>
 
               {booking.notes && (
-                <div className="mb-6 sm:mb-8 p-4 rounded-2xl sm:rounded-3xl bg-brand-beige/10 border border-brand-beige/20 italic text-xs sm:text-sm text-brand-black/60 line-clamp-3">
+                <div className="mb-6 sm:mb-8 p-4 rounded-2xl sm:rounded-3xl bg-brand-beige/10 border border-brand-beige/30 text-xs sm:text-sm text-brand-black/60 line-clamp-3">
                   "{booking.notes}"
                 </div>
               )}
@@ -94,14 +94,14 @@ export default function BookingsTab() {
                 <div className="flex gap-2 sm:gap-3">
                   <button 
                     onClick={() => updateStatus(booking.id, 'confirmed')}
-                    className="flex-grow bg-brand-black text-white py-4 rounded-xl sm:rounded-2xl font-black text-[10px] sm:text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg shadow-brand-black/10 active:scale-95 transition-all"
+                    className="flex-grow bg-brand-black text-white py-3 rounded-xl sm:rounded-2xl font-semibold text-[10px] sm:text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-[0_16px_30px_rgba(23,23,23,0.2)] active:scale-95 transition-all"
                   >
                     <Check className="w-3 h-3 sm:w-4 sm:h-4 text-brand-yellow" />
                     Accept
                   </button>
                   <button 
                     onClick={() => updateStatus(booking.id, 'rejected')}
-                    className="bg-brand-white text-brand-black/40 px-5 sm:px-6 py-4 rounded-xl sm:rounded-2xl font-black text-[10px] sm:text-xs uppercase tracking-widest active:text-red-500 transition-all active:scale-95"
+                    className="bg-brand-white text-brand-black/50 px-5 sm:px-6 py-3 rounded-xl sm:rounded-2xl font-semibold text-[10px] sm:text-xs uppercase tracking-widest active:text-red-500 transition-all active:scale-95"
                   >
                     <X className="w-3 h-3 sm:w-4 sm:h-4" />
                   </button>

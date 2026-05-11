@@ -6,6 +6,7 @@ import LandingPage from './pages/LandingPage';
 import DineInOrder from './pages/DineInOrder';
 import EventBooking from './pages/EventBooking';
 import HomeDelivery from './pages/HomeDelivery';
+import DineInBill from './pages/DineInBill';
 import KitchenDisplay from './pages/KitchenDisplay';
 import WaiterPanel from './pages/WaiterPanel';
 import AdminDashboard from './pages/Admin/AdminDashboard';
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/delivery" element={<HomeDelivery />} />
         <Route path="/confirmation" element={<OrderConfirmation />} />
         <Route path="/track-order" element={<OrderTracking />} />
+        <Route path="/bill" element={<DineInBill />} />
 
         {/* Internal Side */}
         <Route path="/kitchen" element={<KitchenDisplay />} />
